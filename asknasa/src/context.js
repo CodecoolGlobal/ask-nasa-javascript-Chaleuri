@@ -1,6 +1,8 @@
 import { createContext } from "react";
 
-export default NasaContext = createContext({
+const NasaContext = createContext({
     date: new Date().toString(),
     setDate: () => {}
 });
+
+export default NasaContext;
