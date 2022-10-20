@@ -5,14 +5,17 @@ import NasaContext from "../context.js";
 const PictureOfTheDay = () => {
     const {date} = useContext(NasaContext);
     const [pictureData, setPictureData] = useState();
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         getPictureByDay(date).then((data) => {
             setPictureData(data);
+            setLoaded(true);
         })
     }, [date]);
 
     return (
+        loaded ?
         <div className={'picture-data-container'}>
             <div className={'picture-title-container'}>
                 <h1>{pictureData['title']}</h1>
@@ -22,11 +25,16 @@ const PictureOfTheDay = () => {
                 <p className={"picture-description"}>{pictureData['explanation']}</p>
             </div>
             <div className={'picture-container'}>
-                pictureData['media_type'] === 'image' ?
+                {pictureData['media_type'] == 'image' ?
                     <img src={pictureData['url']} alt={'Picture of the currently selected day.'} style={{maxWidth: '50%'}}/>
                 :
                     <iframe src={pictureData['url']} title={'Video of the currently selected day.'} style={{maxWidth: '50%'}}/>
+                }
             </div>
+        </div>
+        :
+        <div>
+
         </div>
     )
 }
