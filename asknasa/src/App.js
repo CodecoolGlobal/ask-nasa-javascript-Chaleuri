@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+import {useState} from 'react'
 import './App.css';
-import {API_KEY} from "configuration/config.js";
+import NasaContext from "./context.js";
+import DayPickerComponent from "./components/dayPickerComponent.js";
 
 function App() {
+  const [date, setDate] = useState(new Date().toString());
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NasaContext.Provider value={{date, setDate}}>
+        <div className={'asknasa-container'}>
+          <div className={'input-field-container'}>
+            <p>
+              Nasa took a picture of our universe each day! Select a date, and check out that day's picture!
+            </p>
+            <DayPickerComponent />
+          </div>
+        </div>
+      </NasaContext.Provider>
     </div>
   );
 }
