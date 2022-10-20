@@ -1,7 +1,7 @@
 export const convertDateToString = (inputDate) => {
     let date = new Date(inputDate);
     let year = '' + date.getFullYear();
-    let month = '' + date.getMonth();
+    let month = '' + (date.getMonth() + 1);
     let day = '' + date.getDay();
 
     if (month.length < 2) {
